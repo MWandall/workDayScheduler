@@ -1,5 +1,17 @@
 var timeDisplayEl = $('#clock')
 var currentDayEl = $('#currentDay')
+var saveButton = $('.saveBtn')
+var hourNine = $('hour-9')
+var hourTen = $('hour-10')
+var hourEleven = $('hour-11')
+var hourTwelve = $('hour-12')
+var hourOne = $('hour-1')
+var hourTwo = $('hour-2')
+var hourThree = $('hour-3')
+var hourFour = $('hour-4')
+var hourFive = $('hour-5')
+var textInput = $('.description')
+
 
 
 // Wrap all code that interacts with the DOM in a call to jQuery to ensure that
@@ -13,16 +25,42 @@ $(function () {
     // time-block containing the button that was clicked? How might the id be
     // useful when saving the description in local storage?
     //
+    // *var textInput = $('.description')
+    // *var saveButton = $('.saveBtn') written at top, just a reminder of names
+    // *var hourNine = $('hour-9')
+
+    saveButton.addEventListener('click', function() {
+        var text = hourNine.value;
+        localStorage.setItem('userTextInput', JSON.stringify(text))
+
+    });
+
+    var storedText = localStorage.getItem(text);
+    if (storedText) {
+        var pulledText = JSON.parse(savedText);
+        hourNine.value = pulledText;
+    }
+
     // TODO: Add code to apply the past, present, or future class to each time
     // block by comparing the id to the current hour. HINTS: How can the id
     // attribute of each time-block be used to conditionally add or remove the
     // past, present, and future classes? How can Day.js be used to get the
     // current hour in 24-hour time?
-    //
+
+
+    // if dayjs() === hourNine
+    //                 hourTen etc
+
+
+    //*maybe .diff? even and odd hour numbers trigger color changes?
     // TODO: Add code to get any user input that was saved in localStorage and set
     // the values of the corresponding textarea elements. HINT: How can the id
     // attribute of each time-block be used to do this?
     //
+
+
+
+
     // TODO: Add code to display the current date in the header of the page.
   });
 
@@ -38,3 +76,29 @@ $(function () {
 
   displayTime();
 setInterval(displayTime, 1000);
+
+
+
+
+
+// var today = dayjs();
+// var hourNum = today.diff(beginningOfYear, 'hour');
+// var evenOddHour = hourNum % 2 === 1;    
+
+
+// var hourCard [
+//     "$(".hour-9")"
+
+
+// ]
+
+
+// **example from 26 storage todos 
+// var todos = [];
+//   // Get stored todos from localStorage
+//   var storedTodos = JSON.parse(localStorage.getItem("todos"));
+//     // If todos were retrieved from localStorage, update the todos array to it
+//     if (storedTodos !== null) {
+//         todos = storedTodos;
+//       }
+
