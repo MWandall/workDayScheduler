@@ -1,13 +1,13 @@
 
-var hourNine = $('#hour-9')
-var hourTen = $('#hour-10')
-var hourEleven = $('#hour-11')
-var hourTwelve = $('#hour-12')
-var hourOne = $('#hour-13')
-var hourTwo = $('#hour-14')
-var hourThree = $('#hour-15')
-var hourFour = $('#hour-16')
-var hourFive = $('#hour-17')
+// var hourNine = $('#hour-9')
+// var hourTen = $('#hour-10')
+// var hourEleven = $('#hour-11')
+// var hourTwelve = $('#hour-12')
+// var hourOne = $('#hour-13')
+// var hourTwo = $('#hour-14')
+// var hourThree = $('#hour-15')
+// var hourFour = $('#hour-16')
+// var hourFive = $('#hour-17')
 
 var textInput = $('.description')
 var saveButton = $('.saveBtn')
@@ -19,7 +19,7 @@ var currentTimeHours = dayjs().hour();
 
 $(function () {
 
-    console.log(savedSchedule())
+    // console.log(savedSchedule())
 
 //saving any user input to respective time keys
     var saveButton = $('.saveBtn');
@@ -39,9 +39,10 @@ $(function () {
     function savedSchedule() {
         for (var i = 9; i <= 17; i++) {
 
-            
-            var scheduleEntry = localStorage.getItem(i);
-            $("#" + i + "").text(scheduleEntry);
+            //id for each hour, plus user text, for current value in the index
+            var scheduleEntry = localStorage.getItem("hour-" + i);
+            console.log(scheduleEntry);
+            $("#hour-" + i + "").text(scheduleEntry);
         }
 
     }
@@ -54,7 +55,8 @@ $(function () {
     function timeColors() {
         textInput.each(function () {
             var timeBlock = $(this).attr("id");
-       
+       console.log( parseInt(timeBlock.split("-")[1]));
+       timeBlock = parseInt(timeBlock.split("-")[1])
 
         if (currentTimeHours === timeBlock) {
                 $(this).addClass("present");
