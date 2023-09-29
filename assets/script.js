@@ -1,6 +1,4 @@
 
-var saveButton = $('.saveBtn')
-
 var hourNine = $('#hour-9')
 var hourTen = $('#hour-10')
 var hourEleven = $('#hour-11')
@@ -12,35 +10,19 @@ var hourFour = $('#hour-16')
 var hourFive = $('#hour-17')
 
 var textInput = $('.description')
+var saveButton = $('.saveBtn')
 
-
+var userImputField = [];
+var saveBtns = [];
+var todos = [];
 var currentTimeHours = dayjs().hour();
-
-
-function timeColors() {
-    textInput.each(function () {
-        var timeBlock = $(this).attr("id");
-   
-    if (currentTimeHours > timeBlock) {
-        $(this).addClass("past");
-    } else if (currentTimeHours === timeBlock) {
-        $(this).addClass("present");
-        $(this).remove("past");
-    } else {
-        $(this).addClass("future");
-        $(this).remove("present");
-        $(this).remove("past");
-    }
-    
-})};
-
-
 
 
 // Wrap all code that interacts with the DOM in a call to jQuery to ensure that
 // the code isn't run until the browser has finished rendering all the elements
 // in the html.
 $(function () {
+    savedSchedule();
     // TODO: Add a listener for click events on the save button. This code should
     // use the id in the containing time-block as a key to save the user input in
     // local storage. HINT: What does `this` reference in the click listener
@@ -52,17 +34,26 @@ $(function () {
     // *var saveButton = $('.saveBtn') written at top, just a reminder of names
     // *var hourNine = $('hour-9')
 
-    // saveButton.on('click', function() {
-    //     var text = hourNine.value;
-    //     localStorage.setItem('userTextInput', JSON.stringify(text))
+    var saveButton = $('.saveBtn');
+    saveButton.on("click", function (event) {
+        event.preventDefault();
+        var hourId = $(this).attr("id")
+        var userInputField = $(this).siblings(".description").val();
+        
+        localStorage.setItem(hourId, userInputField);
+        savedSchedule();
 
-    // });
+    });
 
-    // var storedText = localStorage.getItem(text);
-    // if (storedText) {
-    //     var pulledText = JSON.parse(savedText);
-    //     hourNine.value = pulledText;
-    // }
+   console.log(savedSchedule())
+
+    function savedSchedule() {
+        for (var i = 9; i < 18; i++) {
+            var scheduleEntry = localStorage.getItem(localStorage.key(i));
+            $("#" + i + "").append(scheduleEntry);
+        }
+
+    }
 
     // TODO: Add code to apply the past, present, or future class to each time
     // block by comparing the id to the current hour. HINTS: How can the id
@@ -99,6 +90,7 @@ $(function () {
 
 
 
+
     // TODO: Add code to display the current date in the header of the page.
     var timeDisplayEl = $('#clock')
     var currentDayEl = $('#currentDay')
@@ -116,6 +108,8 @@ $(function () {
   setInterval(displayTime, 1000);
 
   timeColors()
+
+  savedSchedule()
 
 
   });
