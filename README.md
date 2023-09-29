@@ -28,7 +28,9 @@ If your README is long, add a table of contents to make it easy for users to fin
 
 ## Usage
 
-![Alt text](assets/homework_workDayScheduler.png)
+https://mwandall.github.io/workDayScheduler/
+
+![work day scheduler](assets/homework_workDayScheduler.png)
 
 ## Credits
 
