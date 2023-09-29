@@ -12,9 +12,9 @@ var hourFive = $('#hour-17')
 var textInput = $('.description')
 var saveButton = $('.saveBtn')
 
-var userImputField = [];
-var saveBtns = [];
-var todos = [];
+// var userImputField = [];
+// var saveBtns = [];
+// var todos = [];
 var currentTimeHours = dayjs().hour();
 
 
@@ -34,26 +34,35 @@ $(function () {
     // *var saveButton = $('.saveBtn') written at top, just a reminder of names
     // *var hourNine = $('hour-9')
 
+    console.log(savedSchedule())
+
+
     var saveButton = $('.saveBtn');
-    saveButton.on("click", function (event) {
-        event.preventDefault();
-        var hourId = $(this).attr("id")
+    saveButton.on("click", function () {
+        // event.preventDefault();
+        var buttonId = $(this).attr("id")
         var userInputField = $(this).siblings(".description").val();
         
-        localStorage.setItem(hourId, userInputField);
+        localStorage.setItem(buttonId, userInputField);
         savedSchedule();
 
     });
 
-   console.log(savedSchedule())
+    savedSchedule();
+
 
     function savedSchedule() {
-        for (var i = 9; i < 18; i++) {
-            var scheduleEntry = localStorage.getItem(localStorage.key(i));
-            $("#" + i + "").append(scheduleEntry);
+        for (var i = 9; i <= 17; i++) {
+
+            
+            var scheduleEntry = localStorage.getItem(i);
+            $("#" + i + "").text(scheduleEntry);
         }
 
     }
+
+
+
 
     // TODO: Add code to apply the past, present, or future class to each time
     // block by comparing the id to the current hour. HINTS: How can the id
@@ -115,7 +124,7 @@ $(function () {
   });
 
 
-
+  
 
 
 
